@@ -11012,6 +11012,10 @@
       "baseline": "2024-09-29",
       "port-version": 1
     },
+    "zlog": {
+      "baseline": "1.2.20",
+      "port-version": 0
+    },
     "zoe": {
       "baseline": "3.6",
       "port-version": 1

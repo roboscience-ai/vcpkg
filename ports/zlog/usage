@@ -1,0 +1,33 @@
+zlog provides CMake targets:
+
+    find_package(zlog CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE zlog::zlog)
+
+    # zlog.conf example
+    ```
+    [global]
+    strict init = true
+    reload conf period = 0
+
+    buffer min = 1024
+    buffer max = 2MB
+
+    rotate lock file = self
+    default format = "%d(%F %T.%l) %6.6t %c %f:%L %m%n"
+
+    file perms = 644
+
+    [formats]
+    log = "%-6V %D.%ms [%p:%t-%c@%f:%L] %m%n"
+    error_format = "[31m%-6V%D.%ms [%p:%t-%c@%f:%L] %m[0m%n"
+    info_format = "[32m%-6V%D.%ms [%p:%t-%c@%f:%L] %m[0m%n"
+    warn_format= "[33m%-6V%D.%ms [%p:%t-%c@%f:%L] %m[0m%n"
+    debu_format = "[36m%-6V%D.%ms [%p:%t-%c@%f:%L] %m[0m%n"
+
+    [rules]
+    *.=DEBUG  >stdout;debu_format
+    *.=INFO  >stdout;info_format
+    *.=WARN  >stdout;warn_format
+    *.=ERROR  >stdout;error_format
+    *.DEBUG         "logs/rs-app_%d(%F).log", 10MB * 10 ~ "logs/rs-app_%d(%F)_#2s.log" ; log
+    ```
